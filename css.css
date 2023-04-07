@@ -1,0 +1,34 @@
+.outer{
+    margin-left:200px;
+    display:flex;
+    align-items: center;
+    
+}
+
+.folderdiv{
+    margin-bottom:80px;
+}
+
+.buttondiv{
+    width:50%
+}
+
+
+
+.tags{
+    display:flex
+}
+#tagstext{
+    width:500px;
+    height:100px;
+    
+    }
+
+
+#folder {
+    margin-bottom:15px
+}
+
+#downloadbutton{
+    visibility: hidden;
+}
