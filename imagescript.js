@@ -20,7 +20,7 @@ STRUCTURE FOR DOWNLOADING LABELED DATA
 
 */
 nextBtn.addEventListener('click', () => { 
-
+  if (currentFileIndex != files.length) {
   const checkboxes = document.querySelectorAll('input[type="checkbox"]'); // grab all the checkbox info at this time
   let checkedtags = []
 
@@ -57,6 +57,7 @@ nextBtn.addEventListener('click', () => {
   } else {
     console.log('no more images');
   }
+}
 
 });
 
@@ -83,10 +84,14 @@ input.addEventListener('change', (event) => {
   for (i=0;i<input.files.length;i++){
     files.push(input.files[i])
   }
+  // Sort the file list by their names
+  console.log(files)
+files.sort((a, b) => {
+  return a.name.localeCompare(b.name);
+});
+  console.log(files)
   displayImage(currentFileIndex)
 });
-
-
 
 // function for displaying an image
 function displayImage(index) {
@@ -99,7 +104,6 @@ function displayImage(index) {
       file = files[currentFileIndex]
       currentName = file.name
     }
-
 
     // if the image is already labeled, show its tags when it is displayed
     const checkLabel = obj => obj.file_name === currentName;
