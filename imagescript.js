@@ -82,15 +82,19 @@ backBtn.addEventListener('click', () => {
 input.addEventListener('change', (event) => {
 
   for (i=0;i<input.files.length;i++){
-    if (input.files[i].name.endsWith(".jpg") || input.files[i].name.endsWith(".png"))
+    if (input.files[i].name.endsWith(".jpg") || input.files[i].name.endsWith(".png")) {
     files.push(input.files[i])
+    }
   }
   // Sort the file list by their names
-  console.log(files)
+
 files.sort((a, b) => {
   return a.name.localeCompare(b.name);
 });
-  console.log(files)
+
+
+
+
   displayImage(currentFileIndex)
 });
 
