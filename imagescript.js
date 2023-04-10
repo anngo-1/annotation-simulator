@@ -3,8 +3,11 @@ const container = document.querySelector('.image-container');
 const nextBtn = document.getElementById('next-btn');
 const backBtn = document.getElementById("back-btn")
 const download = document.getElementById('downloadbutton')
+let files = [];
+let currentFileIndex = 0;
 let jsonData = []
 let currentName = ""
+
 /*
 STRUCTURE FOR DOWNLOADING LABELED DATA
 
@@ -16,61 +19,43 @@ STRUCTURE FOR DOWNLOADING LABELED DATA
 }
 
 */
+nextBtn.addEventListener('click', () => { 
 
-let files = [];
-let currentFileIndex = 0;
-
-// on the next button click 
-nextBtn.addEventListener('click', () => {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]'); // grab all the checkbox info at this time
   let checkedtags = []
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]'); // redefine 
 
-  currentFileIndex++;
-  if (currentFileIndex < files.length) {
-    displayImage(currentFileIndex);
-  } else {
-    console.log('no more images');
-  }
-  
   for (var i = 0; i < checkboxes.length; i++) {
-
-    //get the checkbox's id (tag)
-    if (checkboxes[i].checked == true) {
+    if (checkboxes[i].checked == true) {  //get the checkbox's id (tag) and push it into an array
       checkedtags.push(checkboxes[i].id)
     }
-
-    //clear the checkbox
-    checkboxes[i].checked = false;
   }
-  // first, check if a label has already been made. overwrite if so
-
-  const checkLabel = obj => obj.file_name === currentName;
   
-  if (jsonData.some(checkLabel)) //if already labeled, overwrite
+  const checkLabel = obj => obj.file_name === currentName; // first, check if that label has already been made. overwrite if so
+  if (jsonData.some(checkLabel)) 
   {
-  
-    jsonData[currentFileIndex-1] =
+    jsonData[currentFileIndex] =
     {  
       file_name:currentName,  
       tags_labeled: checkedtags,
       file_num: currentFileIndex
     }
-    
   } else {
-
-
   // case for completely new
-  
   jsonData.push(
-
     {  
     file_name:currentName,  
     tags_labeled: checkedtags,
     file_num: currentFileIndex
   }
-  
-
   )
+  }
+
+  clearChecks() // clear the current checkboxes
+  currentFileIndex++; //move onto the next image in the folder
+  if (currentFileIndex < files.length) {
+    displayImage(currentFileIndex);
+  } else {
+    console.log('no more images');
   }
 
 });
@@ -78,30 +63,16 @@ nextBtn.addEventListener('click', () => {
 
 
 backBtn.addEventListener('click', () => {
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]'); // redefine 
   // go back an index
   if (currentFileIndex!=0) {
     currentFileIndex-=1;
+    clearChecks()
     displayImage(currentFileIndex)
-  
-
-  currentArray = jsonData[currentFileIndex]
-  for (var i = 0; i < checkboxes.length; i++) {
-
-      //get the checkbox's id (tag)
-      currentArrayTags = currentArray.tags_labeled
-      if (currentArrayTags.includes(checkboxes[i].id)) {
-        checkboxes[i].checked = true;
-      }
-  
-    }
-  
   }
 
+
+
 })
-
-
-
 
 
 
@@ -120,15 +91,17 @@ input.addEventListener('change', (event) => {
 // function for displaying an image
 function displayImage(index) {
 
-    // if the image is already labeled (for example we are going back), show its tags
-  
-
-
-
-
-
     file = files[index]
-    currentName = file.name
+    currentName = file.name // keep track of the current name
+
+
+
+    // if the image is already labeled, show its tags when it is displayed
+    const checkLabel = obj => obj.file_name === currentName;
+    if (jsonData.some(checkLabel)) {
+      displayChecks(currentFileIndex)
+    }
+
     const breakline = document.createElement("br")
     const image = document.createElement('img');
     const count = document.createTextNode("Image " + (currentFileIndex+1))
@@ -150,4 +123,28 @@ function displayImage(index) {
     download.setAttribute('href', urlblob);
     download.setAttribute('download','data.json')
     download.style.visibility = "visible"
+}
+
+function displayChecks(currentFileIndex) {
+
+  // redefine
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  currentArray = jsonData[currentFileIndex]
+  for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = false;
+      //get the checkbox's id (tag)
+    
+      currentArrayTags = currentArray.tags_labeled
+      if (currentArrayTags.includes(checkboxes[i].id)) {
+        checkboxes[i].checked = true;
+      }
+  
+    }
+}
+
+function clearChecks() {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  for (var i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].checked = false;
+  }
 }
