@@ -94,6 +94,11 @@ function displayImage(index) {
     file = files[index]
     currentName = file.name // keep track of the current name
 
+    while (!(file.name.endsWith(".jpg") || file.name.endsWith(".png"))) {
+      currentFileIndex++
+      file = files[currentFileIndex]
+      currentName = file.name
+    }
 
 
     // if the image is already labeled, show its tags when it is displayed
