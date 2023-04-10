@@ -82,6 +82,7 @@ backBtn.addEventListener('click', () => {
 input.addEventListener('change', (event) => {
 
   for (i=0;i<input.files.length;i++){
+    if (input.files[i].name.endsWith(".jpg") || input.files[i].name.endsWith(".png"))
     files.push(input.files[i])
   }
   // Sort the file list by their names
@@ -98,13 +99,6 @@ function displayImage(index) {
 
     file = files[index]
     currentName = file.name // keep track of the current name
-
-    while (!(file.name.endsWith(".jpg") || file.name.endsWith(".png"))) {
-      currentFileIndex++
-      file = files[currentFileIndex]
-      currentName = file.name
-    }
-
     // if the image is already labeled, show its tags when it is displayed
     const checkLabel = obj => obj.file_name === currentName;
     if (jsonData.some(checkLabel)) {
