@@ -7,7 +7,7 @@ sendbutton.onclick = function(){
         "link":link.value,
         "data": jsonData
     }
-        fetch('http://127.0.0.1:5002/updatesheet', {
+        fetch('http://127.0.0.1:5002/updatesheet/', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
