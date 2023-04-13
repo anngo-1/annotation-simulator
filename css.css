@@ -32,3 +32,13 @@
 #downloadbutton{
     visibility: hidden;
 }
+
+#sendtosheet {
+    margin-top:5px
+}
+
+#sheetlink {
+    width:500px;
+    height:20px;
+    margin-top:20px
+}

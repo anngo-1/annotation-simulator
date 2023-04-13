@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Annotation Simulator</title>
 <link rel="stylesheet" href = "css.css">
 </head>
 <body>
@@ -26,11 +26,14 @@
     <div id="checkboxes"></div>
     <button type="button" id="back-btn">Back</button>
     <button type="button" id="next-btn">Next</button>
+    <textarea id = "sheetlink" placeholder = "add link to google sheet (ENABLE EDITING FOR ALL)"></textarea>
+    <button type = "button" id = "sendtosheet">Send to spreadsheet (MUST HAVE API RUNNING & DO THIS AT THE END OF ANNOTATION)</button>
     </div>
     </div>
 </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src = "spreadsheetbutton.js"></script>
 <script src="imagescript.js"></script>
 <script src = "checkboxes.js"></script>
 

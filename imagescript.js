@@ -7,7 +7,7 @@ let files = [];
 let currentFileIndex = 0;
 let jsonData = []
 let currentName = ""
-
+let entername = prompt("Enter your name for annotation analysis")
 /*
 STRUCTURE FOR DOWNLOADING LABELED DATA
 
@@ -43,6 +43,7 @@ nextBtn.addEventListener('click', () => {
   // case for completely new
   jsonData.push(
     {  
+    annotator:entername,
     file_name:currentName,  
     tags_labeled: checkedtags,
     file_num: currentFileIndex
@@ -112,8 +113,8 @@ function displayImage(index) {
     const breakline = document.createElement("br")
     const image = document.createElement('img');
     const count = document.createTextNode("Image " + (currentFileIndex+1))
-    image.style.width = "50%"
-    
+    image.style.width = "30%"
+  
     image.onload = () => {
       container.innerHTML = '';
       container.appendChild(count)
