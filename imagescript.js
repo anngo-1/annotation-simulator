@@ -35,6 +35,7 @@ nextBtn.addEventListener('click', () => {
   {
     jsonData[currentFileIndex] =
     {  
+      annotator:entername,
       file_name:currentName,  
       tags_labeled: checkedtags,
       file_num: currentFileIndex
