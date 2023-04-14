@@ -10,7 +10,7 @@ sendbutton.onclick = function(){
         "link":link.value,
         "data": jsonData
     }
-        fetch('https://anngo1.pythonanywhere.com/updatesheet', {
+        fetch('http://anngo1.pythonanywhere.com/updatesheet', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
