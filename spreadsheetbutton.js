@@ -10,7 +10,7 @@ sendbutton.onclick = function(){
         "link":link.value,
         "data": jsonData
     }
-        fetch('http://anngo1.pythonanywhere.com/updatesheet', {
+        fetch('https://anngo1.pythonanywhere.com/updatesheet', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -34,7 +34,7 @@ resultbutton.onclick = function() {
         link:link.value,
         tags_used: tagstext.value
         });
-        fetch(`http://anngo1.pythonanywhere.com/sheetstats?${params}`)
+        fetch(`https://anngo1.pythonanywhere.com/sheetstats?${params}`)
         .then(response => response.json())
         .then(data => results.innerHTML = "Tags Used: " + data["tags_used"] + "\n" + "Annotator agreement (by percentage): " +  data["agreement_percentage"] + "\n" + "Images agreed upon: " + data["total_agreement_images"])
         .catch(error => {
