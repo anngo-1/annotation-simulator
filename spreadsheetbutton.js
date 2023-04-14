@@ -30,19 +30,29 @@ sendbutton.onclick = function(){
 
 resultbutton.onclick = function() {
     if (link.value != "" ){
-    const params = new URLSearchParams({
-        link:link.value,
-        tags_used: tagstext.value
+        const params = new URLSearchParams({
+            link: link.value,
+            tags_used: tagstext.value
         });
         fetch(`https://anngo1.pythonanywhere.com/sheetstats?${params}`)
         .then(response => response.json())
-        .then(data => results.innerHTML = "Tags Used: " + data["tags_used"] + "\n" + "Annotator agreement (by percentage): " +  data["agreement_percentage"] + "\n" + "Images agreed upon: " + data["total_agreement_images"])
-        .catch(error => {
-            alert(error)
-            
-            console.error(error)});
-    } else {
-        alert("please put in a google sheet")
-    }
+        .then(data => {
+            let output_str = ""; // Fix 1: Initialize output_str variable
 
+            for (let key in data) { // Fix 2: Use "let" to declare the key variable
+                if (data.hasOwnProperty(key)) { // Fix 3: Use "data" instead of "myDict"
+                    let value = data[key]; // Fix 4: Use "data" instead of "myDict"
+                    output_str += (key + ':' + value + "\n");
+                }
+            }
+
+            results.innerHTML = output_str;
+        })
+        .catch(error => {
+            alert(error);
+            console.error(error);
+        });
+    } else {
+        alert("please put in a google sheet");
+    }
 }
