@@ -1,8 +1,10 @@
-const input = document.getElementById('folder');
-const container = document.querySelector('.image-container');
-const nextBtn = document.getElementById('next-btn');
+const input = document.getElementById('folder')
+const container = document.querySelector('.image-container')
+const nextBtn = document.getElementById('next-btn')
 const backBtn = document.getElementById("back-btn")
 const download = document.getElementById('downloadbutton')
+const randombutton = document.getElementById("shuffle-btn")
+const randinput = document.getElementById("shufflebutton")
 let files = [];
 let currentFileIndex = 0;
 let jsonData = []
@@ -97,8 +99,19 @@ files.sort((a, b) => {
 
 
 
+
+
+
+
+
+
   displayImage(currentFileIndex)
+
+
 });
+
+
+
 
 // function for displaying an image
 function displayImage(index) {
@@ -156,4 +169,39 @@ function clearChecks() {
   for (var i = 0; i < checkboxes.length; i++) {
     checkboxes[i].checked = false;
   }
+}
+
+
+randombutton.onclick = function() {
+  shuffleseed = randinput.innerHTML
+
+
+  function shuffle(array, seed) {                // <-- ADDED ARGUMENT
+    var m = array.length, t, i;
+  
+    // While there remain elements to shuffle…
+    while (m) {
+  
+      // Pick a remaining element…
+      i = Math.floor(random(seed) * m--);        // <-- MODIFIED LINE
+  
+      // And swap it with the current element.
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
+      ++seed                                     // <-- ADDED LINE
+    }
+  
+    return array;
+  }
+  
+  function random(seed) {
+    var x = Math.sin(seed++) * 10000; 
+    return x - Math.floor(x);
+  }
+
+ console.log(shuffleseed)
+ files = shuffle(files,random(shuffleseed))
+ displayImage(0)
+ console.log(files)
 }
