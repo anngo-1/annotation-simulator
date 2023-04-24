@@ -4,7 +4,6 @@ const nextBtn = document.getElementById('next-btn')
 const backBtn = document.getElementById("back-btn")
 const download = document.getElementById('downloadbutton')
 const randombutton = document.getElementById("shuffle-btn")
-const randinput = document.getElementById("shufflebutton")
 let files = [];
 let currentFileIndex = 0;
 let jsonData = []
@@ -173,8 +172,8 @@ function clearChecks() {
 
 
 randombutton.onclick = function() {
-  shuffleseed = randinput.innerHTML
-
+  shuffleseed = document.getElementById("shufflebutton").value
+  console.log(shuffleseed)
 
   function shuffle(array, seed) {                // <-- ADDED ARGUMENT
     var m = array.length, t, i;
@@ -200,7 +199,7 @@ randombutton.onclick = function() {
     return x - Math.floor(x);
   }
 
- console.log(shuffleseed)
+
  files = shuffle(files,shuffleseed)
  displayImage(0)
  console.log(files)
