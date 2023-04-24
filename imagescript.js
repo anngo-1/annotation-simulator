@@ -201,7 +201,7 @@ randombutton.onclick = function() {
   }
 
  console.log(shuffleseed)
- files = shuffle(files,random(shuffleseed))
+ files = shuffle(files,shuffleseed)
  displayImage(0)
  console.log(files)
 }
