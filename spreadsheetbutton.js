@@ -3,6 +3,14 @@ const resultbutton = document.getElementById("getresults")
 const link = document.getElementById("sheetlink")
 const results = document.getElementById("results")
 const tagstext = document.getElementById("tagstext")
+
+
+
+
+
+
+
+
 sendbutton.onclick = function(){
 
     if (link.value != "" ){
