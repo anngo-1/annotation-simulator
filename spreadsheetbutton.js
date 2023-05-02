@@ -42,9 +42,9 @@ resultbutton.onclick = function() {
         link:link.value,
         tags_used: tagstext.value
         });
-        fetch(`https://anngo1.pythonanywhere.com/sheetstats?${params}`)
+        fetch(`http://127.0.0.1:5002/sheetstats?${params}`)
         .then(response => response.json())
-        .then(data => results.innerHTML = "Tags Used: " + data["tags_used"] + "\n\n" + "Tag agreement per image: \n" + data["agreement/image"] + "\n" + "Annotator agreement (by percentage): " +  data["agreement_percentage"] + "\n" + "Images agreed upon: " + data["total_agreement_images"])
+        .then(data => results.innerHTML = "Tags Used: " + data["tags_used"] + "\n\n" + "Tag agreement per image: \n" + data["agreement/image"] + "\n" + "AVG Annotator agreement/Image (by percentage): " +  data["agreement_percentage"] + "\n")
         .then(data => console.log(data))
         .catch(error => {
             alert(error)
