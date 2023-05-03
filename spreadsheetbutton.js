@@ -12,7 +12,34 @@ const tagstext = document.getElementById("tagstext")
 
 
 sendbutton.onclick = function(){
-
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]'); // grab all the checkbox info at this time
+    let checkedtags = [];
+       for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked == true) {  //get the checkbox's id (tag) and push it into an array
+        checkedtags.push(checkboxes[i].id)
+      }
+    }
+    const checkLabel = obj => obj.file_name === currentName; // first, check if that label has already been made. overwrite if so
+    if (jsonData.some(checkLabel)) 
+    {
+      jsonData[currentFileIndex] =
+      {  
+        annotator:entername,
+        file_name:currentName,  
+        tags_labeled: checkedtags,
+        file_num: currentFileIndex
+      }
+    } else {
+    // case for completely new
+    jsonData.push(
+      {  
+      annotator:entername,
+      file_name:currentName,  
+      tags_labeled: checkedtags,
+      file_num: currentFileIndex
+    }
+    )
+    }
     if (link.value != "" ){
     data = {
         "link":link.value,
@@ -37,6 +64,34 @@ sendbutton.onclick = function(){
 
 
 resultbutton.onclick = function() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]'); // grab all the checkbox info at this time
+    let checkedtags = [];
+       for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked == true) {  //get the checkbox's id (tag) and push it into an array
+        checkedtags.push(checkboxes[i].id)
+      }
+    }
+    const checkLabel = obj => obj.file_name === currentName; // first, check if that label has already been made. overwrite if so
+    if (jsonData.some(checkLabel)) 
+    {
+      jsonData[currentFileIndex] =
+      {  
+        annotator:entername,
+        file_name:currentName,  
+        tags_labeled: checkedtags,
+        file_num: currentFileIndex
+      }
+    } else {
+    // case for completely new
+    jsonData.push(
+      {  
+      annotator:entername,
+      file_name:currentName,  
+      tags_labeled: checkedtags,
+      file_num: currentFileIndex
+    }
+    )
+    }
     if (link.value != "" ){
     const params = new URLSearchParams({
         link:link.value,
