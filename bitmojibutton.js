@@ -13,7 +13,7 @@ getbitmoji.onclick = function() {
           "link":"https://docs.google.com/spreadsheets/d/1yLvOGvaroSrhyqPrNUY8Fv-IazWva3Ql0TYjVPKI8VY/edit#gid=0",
           "data": checkedtags
       }
-          fetch('https://anngo1.pythonanywhere.com//match', {
+          fetch('https://anngo1.pythonanywhere.com/match', {
               method: 'POST',
               body: JSON.stringify(data),
               headers: {
